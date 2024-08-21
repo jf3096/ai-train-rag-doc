@@ -1,0 +1,145 @@
+# TypeScript 和 JavaScript 注释规范
+
+## 1. 最佳实践
+
+- 保持注释简洁但足够表达。
+- 避免在注释中包含过于具体的实现细节，这些内容可能会随着时间变化而变得无效。
+- ALWAYS 使用 `Block tags` 的注释方式
+
+## 2. 基本规则
+
+### 2.1 文件级别注释
+
+每个文件应以一个描述该文件内容和目的的注释开始。
+
+#### 示例（TypeScript）
+
+```typescript
+/**
+ * @fileoverview 这是一个示例文件，展示了如何使用TypeDoc进行注释。
+ * @author sheailun
+ */
+```
+
+#### 示例（JavaScript）
+
+```javascript
+/**
+ * @fileoverview 这是一个示例文件，展示了如何使用JSDoc进行注释。
+ */
+```
+
+### 2.2 函数和方法注释
+
+函数和方法应该有详细的注释，包括参数、返回值类型以及可能抛出的异常。
+
+#### 示例（TypeScript）
+
+```typescript
+/**
+ * 计算两个数的和。
+ *
+ * @param {number} a 第一个数字
+ * @param {number} b 第二个数字
+ * @returns {number} 两个数的和
+ */
+function add(a: number, b: number): number {
+    return a + b;
+}
+```
+
+#### 示例（JavaScript）
+
+```javascript
+/**
+ * 计算两个数的和。
+ *
+ * @param {number} a 第一个数字
+ * @param {number} b 第二个数字
+ * @returns {number} 两个数的和
+ */
+function add(a, b) {
+    return a + b;
+}
+```
+
+### 2.3 类和接口注释
+
+类和接口应该有详细的注释，包括它们的目的、构造函数参数以及每个方法的作用。
+
+#### 示例（TypeScript）
+
+```typescript
+/**
+ * 用户类，表示系统中的用户。
+ */
+class User {
+    /**
+     * 创建一个新的用户实例。
+     *
+     * @param {string} name 用户名
+     * @param {string} email 用户邮箱
+     */
+    constructor(name: string, email: string) {
+        this.name = name;
+        this.email = email;
+    }
+
+    /**
+     * 获取用户的全名。
+     *
+     * @returns {string} 用户的全名
+     */
+    getFullName(): string {
+        return `${this.name} <${this.email}>`;
+    }
+}
+```
+
+## 3. 高级注释
+
+### 3.1 复杂类型注释
+
+对于复杂的数据结构，如对象字面量、数组等，应详细注释它们的结构和含义。
+
+#### 示例（TypeScript）
+
+```typescript
+/**
+ * 用户信息。
+ *
+ * @typedef {Object} UserInfo
+ * @property {string} name 用户名
+ * @property {string} email 用户邮箱地址
+ */
+
+/** @type {UserInfo} */
+const userInfo = {
+    name: "John Doe",
+    email: "john.doe@example.com"
+};
+```
+
+### 3.2 异常处理
+
+当函数可能抛出异常时，应在注释中明确指出。
+
+#### 示例（TypeScript）
+
+```typescript
+/**
+ * 从服务器获取数据。
+ *
+ * @throws {Error} 当请求失败时抛出错误
+ */
+async function fetchData(): Promise<any> {
+    try {
+        const response = await fetch("https://api.example.com/data");
+        if (!response.ok) throw new Error("Request failed");
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+```
